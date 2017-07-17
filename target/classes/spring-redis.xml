@@ -19,7 +19,7 @@
 		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
 	</bean>
 	<!-- redis服务器中心 -->
-	<bean id="connectionFactory"
+	<bean id="jedisConnectionFactory"
 		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
 		<property name="poolConfig" ref="poolConfig" />
 		<property name="port" value="${redis.port}" />
@@ -30,7 +30,7 @@
 	<!-- redis客户端模板 -->
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
 		<!-- 注入连接工厂 -->
-		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="connectionFactory" ref="jedisConnectionFactory" />
 		<!-- 配置key序列化类 -->
 		<property name="keySerializer">
 			<bean

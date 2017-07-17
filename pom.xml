@@ -61,7 +61,6 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -78,7 +77,11 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>4.3.7.RELEASE</version>
+		</dependency>
 		<!-- spring security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -136,6 +139,27 @@
 		</dependency>
 
 
+		<!-- xbean 如<amq:connectionFactory /> -->
+		 <dependency>
+			<groupId>org.apache.xbean</groupId>
+			<artifactId>xbean-spring</artifactId>
+			<version>3.16</version>
+		</dependency> 
+
+		<!-- activemq -->
+		 <dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-core</artifactId>
+			<version>5.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-pool</artifactId>
+			<version>5.14.5</version>
+		</dependency> 
+		
+		
+		
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
@@ -221,8 +245,9 @@
 			<version>1.10.4.RELEASE</version>
 		</dependency>
 		<!-- Jedis connect to redis -->
-		<!-- redis and spring data redis are restricted,both of them are not allowed for the latest version -->
-		<!-- conflict with the others   -->
+		<!-- redis and spring data redis are restricted,both of them are not allowed 
+			for the latest version -->
+		<!-- conflict with the others -->
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>

@@ -5,7 +5,9 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:spring-mybatis.xml,
     			 classpath:spring-security.xml,
-    			 classpath:spring-redis.xml</param-value>
+    			 classpath:spring-redis.xml,
+    			 classpath:spring-activemq.xml
+    </param-value>
   </context-param>
   <context-param>
     <param-name>spring.profile.default</param-name>
