@@ -140,14 +140,14 @@
 
 
 		<!-- xbean 如<amq:connectionFactory /> -->
-		 <dependency>
+		<dependency>
 			<groupId>org.apache.xbean</groupId>
 			<artifactId>xbean-spring</artifactId>
 			<version>3.16</version>
-		</dependency> 
+		</dependency>
 
 		<!-- activemq -->
-		 <dependency>
+		<dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-core</artifactId>
 			<version>5.7.0</version>
@@ -156,10 +156,10 @@
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-pool</artifactId>
 			<version>5.14.5</version>
-		</dependency> 
-		
-		
-		
+		</dependency>
+
+
+
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
@@ -258,6 +258,20 @@
 			<artifactId>spring-data-redis</artifactId>
 			<version>1.7.11.RELEASE</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-core</artifactId>
+			<version>5.5.0</version>
+		</dependency> 
+		<!-- solr -->
+		 <dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-solr</artifactId>
+			<version>2.1.4.RELEASE</version>
+		</dependency> 
+		<!-- https://mvnrepository.com/artifact/org.apache.solr/solr-core -->
+
 	</dependencies>
 
 </project>

@@ -1,20 +1,24 @@
 package org.com.muggle.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.log4j.Logger;
+import org.com.muggle.model.Product;
 import org.com.muggle.model.User;
+import org.com.muggle.repository.ProductRepository;
+import org.com.muggle.repository.SolrProductRepository;
 import org.com.muggle.service.ConsumerService;
 import org.com.muggle.service.IUserService;
 import org.com.muggle.service.ProducerService;
 import org.com.muggle.util.JedisFactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,6 +49,10 @@ public class UserController {
 	// queue consumer
 	@Resource(name = "consumerService")
 	private ConsumerService consumer;
+	
+	// solrProductRepository
+	@Autowired
+	private SolrProductRepository solrProductRepository;
 
 	@RequestMapping("/showUser")
 	public String toIndex(HttpServletRequest request, Model model) {
@@ -55,6 +63,7 @@ public class UserController {
 		this.testCustomizeJedis(model);
 		this.testRedisTemplateImp(model);
 		this.testActiveMqTemplateImp();
+		this.testSolr(model);
 		return "showUser";
 	}
 
@@ -87,6 +96,12 @@ public class UserController {
 		}
 	}
 
+	
+	private void testSolr(Model model){
+		Product product =solrProductRepository.findOne("GB18030TEST");
+		model.addAttribute("product", product);
+	}
+	
 	@RequestMapping("/saveUser")
 	public String saveUser(HttpServletRequest request, Model model) {
 		User newUser = new User();
@@ -99,4 +114,5 @@ public class UserController {
 		model.addAttribute("user", user);
 		return "showUser";
 	}
+
 }

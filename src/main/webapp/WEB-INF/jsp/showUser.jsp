@@ -8,5 +8,6 @@
 <body>${user.userName}
 	</br> ${redisValue}
 	</br> ${redistempleate}
+	</br>get data from solr - ${product.name}
 </body>
 </html>

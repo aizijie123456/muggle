@@ -6,7 +6,8 @@
     <param-value>classpath:spring-mybatis.xml,
     			 classpath:spring-security.xml,
     			 classpath:spring-redis.xml,
-    			 classpath:spring-activemq.xml
+    			 classpath:spring-activemq.xml,
+    			 classpath:spring-solr.xml
     </param-value>
   </context-param>
   <context-param>
