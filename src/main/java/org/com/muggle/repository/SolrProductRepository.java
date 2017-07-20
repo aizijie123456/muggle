@@ -1,5 +1,7 @@
 package org.com.muggle.repository;
 
+import java.util.Iterator;
+
 import org.com.muggle.model.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.NoRepositoryBean;
@@ -7,6 +9,7 @@ import org.springframework.data.solr.core.query.Criteria;
 import org.springframework.data.solr.core.query.FacetOptions;
 import org.springframework.data.solr.core.query.FacetQuery;
 import org.springframework.data.solr.core.query.Query;
+import org.springframework.data.solr.core.query.Query.Operator;
 import org.springframework.data.solr.core.query.SimpleFacetQuery;
 import org.springframework.data.solr.core.query.SimpleField;
 import org.springframework.data.solr.core.query.SimpleQuery;
@@ -34,6 +37,15 @@ public class SolrProductRepository extends SimpleSolrRepository<Product, String>
 		Query query = new SimpleQuery(new Criteria(new SimpleField(Criteria.WILDCARD)).expression(Criteria.WILDCARD));
 		query.addFilterQuery(new SimpleQuery(new Criteria(SolrSearchableFields.AVAILABLE).is(true)));
 		return getSolrOperations().queryForPage(query, Product.class);
+	}
+
+	@Override
+	public Page<Product> findByConditions(String id, String name) {
+		Criteria c1 = new Criteria(SolrSearchableFields.ID).is(id);
+		Criteria c2 = new Criteria(SolrSearchableFields.NAME).is(name);
+		Query query = new SimpleQuery();
+		query.addCriteria(c1).addCriteria(c2);
+		return getSolrOperations().query(query, Product.class);
 	}
 
 }

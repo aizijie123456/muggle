@@ -1,24 +1,28 @@
 package org.com.muggle.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.log4j.Logger;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.impl.HttpSolrClient;
+import org.apache.solr.common.SolrInputDocument;
 import org.com.muggle.model.Product;
 import org.com.muggle.model.User;
-import org.com.muggle.repository.ProductRepository;
 import org.com.muggle.repository.SolrProductRepository;
 import org.com.muggle.service.ConsumerService;
 import org.com.muggle.service.IUserService;
 import org.com.muggle.service.ProducerService;
+import org.com.muggle.solr.client.SolrClientFactory;
+import org.com.muggle.solr.client.SolrFactory;
 import org.com.muggle.util.JedisFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,6 +58,9 @@ public class UserController {
 	@Autowired
 	private SolrProductRepository solrProductRepository;
 
+	@Resource(name="solrClientFactory")
+	private SolrClientFactory solrClientFactory;
+	
 	@RequestMapping("/showUser")
 	public String toIndex(HttpServletRequest request, Model model) {
 		myLogger.info("invoke user controller test log function");
@@ -63,7 +70,8 @@ public class UserController {
 		this.testCustomizeJedis(model);
 		this.testRedisTemplateImp(model);
 		this.testActiveMqTemplateImp();
-		this.testSolr(model);
+		this.testIndexSolr();
+		this.testFetchFromSolr(model);
 		return "showUser";
 	}
 
@@ -96,10 +104,19 @@ public class UserController {
 		}
 	}
 
+	private void testIndexSolr(){
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("id", "65287");
+		map.put("name", "USD");
+		map.put("cat", "USD");
+		map.put("inStock", "true");
+		solrClientFactory.addKVToSolr(map);
+	}
 	
-	private void testSolr(Model model){
-		Product product =solrProductRepository.findOne("GB18030TEST");
+	private void testFetchFromSolr(Model model){
+		Product product =solrProductRepository.findOne("65287");
 		model.addAttribute("product", product);
+		solrProductRepository.findByConditions("65287", "USD");
 	}
 	
 	@RequestMapping("/saveUser")

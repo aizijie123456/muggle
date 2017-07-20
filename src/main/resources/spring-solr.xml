@@ -10,7 +10,7 @@
 
 	<solr:solr-client id="solrClient" url="http://localhost:8983/solr" />
 
-	<bean id="solrConverter"
+	<bean id="solrConverter" 
 		class="org.springframework.data.solr.core.convert.MappingSolrConverter">
 		<constructor-arg>
 			<bean
@@ -31,7 +31,7 @@
 
 	<bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate">
 		<constructor-arg ref="solrClient" />
-		<property name="solrCore" value="techproducts"/>
+		<property name="solrCore" value="muggle"/>
 		<property name="solrConverter" ref="solrConverter" />
 	</bean>
 
