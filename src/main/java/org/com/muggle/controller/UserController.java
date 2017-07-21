@@ -1,6 +1,5 @@
 package org.com.muggle.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,9 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.log4j.Logger;
-import org.apache.solr.client.solrj.SolrServerException;
-import org.apache.solr.client.solrj.impl.HttpSolrClient;
-import org.apache.solr.common.SolrInputDocument;
 import org.com.muggle.model.Product;
 import org.com.muggle.model.User;
 import org.com.muggle.repository.SolrProductRepository;
@@ -19,10 +15,8 @@ import org.com.muggle.service.ConsumerService;
 import org.com.muggle.service.IUserService;
 import org.com.muggle.service.ProducerService;
 import org.com.muggle.solr.client.SolrClientFactory;
-import org.com.muggle.solr.client.SolrFactory;
 import org.com.muggle.util.JedisFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
